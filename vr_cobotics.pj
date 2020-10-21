@@ -1,0 +1,22 @@
+@=
+projectType="application_plugin";
+projectName="vr_cobotics";
+//referenceDeps = 0;
+projectGUID="D4C8BB4D-D464-4D64-8390-131B0CE02732";
+addProjectDirs=[CGV_DIR."/plugins", CGV_DIR."/libs", CGV_DIR."/test"];
+addProjectDeps=["cgv_utils", "cgv_type", "cgv_data", "cgv_base", "cgv_math",
+				"cgv_media", "cgv_gui", "cgv_render", "cmi_io",
+				"cgv_viewer", "cg_fltk", "crg_grid", "cg_ext", "cgv_gl", 
+				"crg_vr_view", 
+				"cg_vr", "vr_emulator", "openvr_driver"];
+addIncDirs=[INPUT_DIR, CGV_DIR."/libs", CGV_DIR."/test", INPUT_DIR."/nng64/nng/include", INPUT_DIR."/nng64/nngpp/include", INPUT_DIR."/protocbuf64/include"];
+addLibDirs=[
+    INPUT_DIR."/nng64/Release",
+	INPUT_DIR."/protocbuf64/lib"
+];
+excludeSourceDirs=[INPUT_DIR."/protocbuf64" ];
+addDependencies=["nng", "gmock", "gmock_main","libprotobuf", "libprotobuf-lite", "libprotoc", "libprotocd", "libprotobufd", "libprotobuf-lited"];
+addCommandLineArguments=[
+	after("type(shader_config):shader_path='".INPUT_DIR.";".CGV_DIR."/libs/cgv_gl/glsl'","cg_fltk"),	'config:"'.INPUT_DIR.'/config.def"'
+];
+addSharedDefines=["VR_COBOTICS_EXPORTS"];

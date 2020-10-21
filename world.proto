@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+message Object {
+
+    message Position {
+        float x = 1; // in m
+        float y = 2; // in m
+        float z = 3; // height in m
+    }
+    message Size {
+        float length = 1; // in m
+        float width = 2;  // in m
+        float height = 3; // in m
+    }
+    message Orientation {
+        float x = 1; // normalized quaternion
+        float y = 2;
+        float z = 3;
+        float w = 4;
+    }
+    message Color {
+        float r = 1; // 0..1
+        float g = 2; // 0..1
+        float b = 3; // 0..1
+    }
+    enum Type {
+        UNKNOWN = 0;
+        BOX = 1;
+        BIN = 2;
+        ARM = 3;
+    }
+
+    string id = 1;
+    Type type = 2;
+    Position pos = 3;
+    Size size = 4;
+    Orientation orientation = 5;
+    Color color = 6;
+}
+
+// the scene is stored within the ROS side and sent to the CGV framework
+message Scene {
+    repeated Object objects = 1;
+}
+
+// the selection is done by the CGV framework and sent to ROS
+message Selection {
+    string id = 1; // the id corresponds to an id of an Object in a Scene
+}
